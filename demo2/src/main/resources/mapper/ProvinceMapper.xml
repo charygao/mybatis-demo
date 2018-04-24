@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengwenyi.mybatis.demo2.dao.ProvinceDao">
+
+    <!--
+     collection
+
+     -->
+    <resultMap id="pc" type="Province">
+        <id column="pId" property="id" />
+        <result column="pName" property="name" />
+        <collection property="cities" ofType="City">
+            <id column="cId" property="id" />
+            <result column="cName" property="name" />
+        </collection>
+    </resultMap>
+
+    <select id="findById" resultMap="pc">
+        SELECT
+          p.id    as pId,
+          p.name  as pName,
+          c.id    as cId,
+          c.name  as cName
+        FROM
+          province p, city c
+        WHERE
+          c.province_id = p.id
+          AND
+          p.id = #{id}
+    </select>
+
+
+    <select id="findById2" resultType="Province">
+        SELECT
+          id, name
+        FROM
+          province
+        WHERE
+          id = #{id}
+    </select>
+
+    <!--
+     collection 分步加载
+
+     -->
+    <resultMap id="pc3" type="Province">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <collection property="cities"
+                    select="com.fengwenyi.mybatis.demo2.dao.CityDao.findByProvinceId"
+                    column="id"
+        fetchType="eager">
+            <id column="id" property="id" />
+            <result column="name" property="name" />
+        </collection>
+    </resultMap>
+    <select id="findById3" resultMap="pc3">
+        SELECT
+          *
+        FROM
+          province
+        WHERE
+          id = #{id}
+    </select>
+
+</mapper>

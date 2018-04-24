@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengwenyi.mybatis.demo2.dao.CityDao">
+
+    <select id="findById" resultType="com.fengwenyi.mybatis.demo2.domain.City">
+       SELECT
+          id, name
+       FROM
+          city
+       WHERE
+          id = #{id}
+   </select>
+
+   <select id="findById2" resultType="City">
+       SELECT
+          id, name
+       FROM
+          city
+       WHERE
+          id = #{id}
+   </select>
+
+   <select id="findByIdReturnMap" resultType="map">
+       SELECT
+          id, name
+       FROM
+          city
+       WHERE
+          id = #{id}
+   </select>
+
+   <!-- Map<Object, City> findReturnMap (); -->
+   <select id="findReturnMap" resultType="City">
+       SELECT
+          id, name
+       FROM
+          city
+   </select>
+
+   <!-- City findById3 (Integer id); -->
+   <resultMap id="cp" type="City">
+      <id column="cId" property="id"/>
+      <result column="cName" property="name" />
+      <result column="pId" property="province.id" />
+      <association property="province" javaType="Province">
+         <id column="pId" property="id" />
+         <result column="pName" property="name" />
+      </association>
+   </resultMap>
+   <!--
+   自定义封装
+    <resultMap id="cp" type="City">
+      <id column="cId" property="id"/>
+      <result column="cName" property="name" />
+      <result column="pId" property="province.id" />
+      <result column="pName" property="province.name" />
+   </resultMap>
+    -->
+   <select id="findById3" resultMap="cp">
+       SELECT
+          c.id    as cId,
+          c.name  as cName,
+          p.id    as pId,
+          p.name  as pName
+       FROM
+          city c, province p
+       WHERE
+          c.province_id = p.id
+          AND
+          c.id = #{id}
+   </select>
+
+   <!--
+    association 分步查询
+    City findById4 (Integer id);
+    -->
+   <resultMap id="cp2" type="City">
+      <id column="id" property="id"/>
+      <result column="name" property="name" />
+      <association property="province"
+                   select="com.fengwenyi.mybatis.demo2.dao.ProvinceDao.findById2"
+                   column="id"
+                   ><!--fetchType="lazy|eager" // 延迟加载|立即-->
+         <id column="id" property="id" />
+         <result column="name" property="name" />
+      </association>
+   </resultMap>
+   <select id="findById4" resultMap="cp2">
+       SELECT
+          *
+       FROM
+          city
+       WHERE
+          id = #{id}
+   </select>
+
+   <select id="findByProvinceId" resultType="City">
+       SELECT
+          id, name
+       FROM
+          city
+       WHERE
+          province_id = #{pId}
+   </select>
+
+   <!--
+   测试鉴别器 discriminator
+   City findById5 (Integer id);
+   -->
+   <resultMap id="cp5" type="City">
+      <id column="id" property="id"/>
+      <result column="name" property="name" />
+      
+      <discriminator javaType="String" column="name">
+         <case value="巴中" resultType="City">
+            <id column="id" property="id"/>
+            <result column="id" property="name" />
+         </case>
+      </discriminator>
+   </resultMap>
+   <select id="findById5" resultMap="cp5">
+       SELECT
+          id, name
+       FROM
+          city
+       WHERE
+          id = #{id}
+   </select>
+
+
+</mapper>
