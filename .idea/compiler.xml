@@ -9,12 +9,14 @@
         <module name="demo" />
         <module name="demo1" />
         <module name="demo2" />
+        <module name="dynamic-sql" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo" target="1.8" />
       <module name="demo1" target="1.8" />
       <module name="demo2" target="1.8" />
+      <module name="dynamic-sql" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

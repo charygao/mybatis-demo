@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengwenyi.mybatis_demo.dynamicsql.dao.IUserDao" >
+
+    <!-- test if -->
+    <select id="testIf" resultType="User">
+        SELECT
+          id, name, age
+        FROM
+          user
+        WHERE
+          <if test="id > 2">
+              id = #{id}
+          </if>
+    </select>
+
+    <!-- test where -->
+    <select id="testWhere" resultType="User">
+        SELECT
+          id, name, age
+        FROM
+          user
+        <where>
+            <if test="id > 2">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <!-- test trim -->
+    <select id="testTrim" resultType="User">
+        SELECT
+          id, name, age
+        FROM
+          user
+        <trim prefix="where" prefixOverrides="where|and|or" suffix="" suffixOverrides="and|or">
+            <if test="id > 2">
+                id = #{id}
+            </if>
+        </trim>
+    </select>
+
+    <!-- test choose -->
+    <select id="testChoose" resultType="User">
+        SELECT
+        id, name, age
+        FROM
+        user
+        <where>
+            <choose>
+                <when test="id == 2">
+                    id = #{id}
+                </when>
+                <when test="id == 1">
+                    id = #{id}
+                </when>
+                <otherwise>
+                    id = '3'
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!-- test foreach -->
+    <select id="testForeach" resultType="User">
+        SELECT
+          id, name, age
+        FROM
+          user
+        <where>
+            id
+            IN
+            <foreach item="item" index="index" collection="ids"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+</mapper>
