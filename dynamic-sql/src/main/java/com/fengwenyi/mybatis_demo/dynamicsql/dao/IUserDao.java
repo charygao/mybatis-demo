@@ -4,6 +4,8 @@ import com.fengwenyi.mybatis_demo.dynamicsql.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @author Wenyi Feng
  */
@@ -24,5 +26,15 @@ public interface IUserDao {
 
     // test foreach
     User testForeach (@Param("ids") Integer ... ids);
+
+    // test set
+    int testUpdate (@Param("user") User user);
+
+    // test batch inset
+    int testBatchInsert1 (@Param("users") List<User> users);
+
+    // 返回的影响行数不正确
+    // int testBatchInsert2 (@Param("users") List<User> users);
+    // mysql url:spring.datasource.url=jdbc:mysql://localhost:3306/mybatis_demo?allowMultiQueries=true
 
 }

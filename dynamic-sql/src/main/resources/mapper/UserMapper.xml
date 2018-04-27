@@ -61,7 +61,15 @@
         </where>
     </select>
 
-    <!-- test foreach -->
+    <!-- test foreach
+        collection：指定要遍历的集合：
+        list类型的参数会特殊处理封装在map中，map的key就叫list
+        item：将当前遍历出的元素赋值给指定的变量
+        separator:每个元素之间的分隔符
+        open：遍历出所有结果拼接一个开始的字符
+        close:遍历出所有结果拼接一个结束的字符
+        index:索引。遍历list的时候是index就是索引，item就是当前值
+     -->
     <select id="testForeach" resultType="User">
         SELECT
           id, name, age
@@ -76,5 +84,45 @@
             </foreach>
         </where>
     </select>
+
+    <!-- test set -->
+    <update id="testUpdate">
+        UPDATE
+          user
+        <set>
+            <if test="user.name != null">name = #{user.name},</if>
+            <if test="user.age != null and user.age >= 0">age = #{user.age}</if>
+        </set>
+        <where>
+            <if test="user.id != null and user.id > 0">id = #{user.id}</if>
+        </where>
+    </update>
+
+    <!-- test batch insert -->
+    <insert id="testBatchInsert1">
+        INSERT INTO
+          user(name, age)
+        VALUES
+        <foreach collection="users" index="i" item="k" separator=",">
+            (
+            <if test="k.name != null">#{k.name}</if>
+            ,
+            <if test="k.age != null and k.age >= 0">#{k.age}</if>
+            )
+        </foreach>
+    </insert>
+
+    <insert id="testBatchInsert2">
+
+        <foreach collection="users" index="i" item="k" separator=";">
+            INSERT INTO
+              user(name, age)
+            VALUES(
+            <if test="k.name != null">#{k.name}</if>
+            ,
+            <if test="k.age != null and k.age >= 0">#{k.age}</if>
+            )
+        </foreach>
+    </insert>
 
 </mapper>

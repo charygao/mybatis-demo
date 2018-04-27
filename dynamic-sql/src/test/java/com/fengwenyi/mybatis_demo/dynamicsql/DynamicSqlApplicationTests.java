@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DynamicSqlApplicationTests {
@@ -67,5 +70,48 @@ public class DynamicSqlApplicationTests {
         // ==>  SELECT id, name, age FROM user WHERE id IN ( ? , ? , ? )
         System.out.println(user.toString());
     }
+
+    @Test
+    public void testUpdate () {
+        User user = userDao.testIf(3);
+
+        user.setName("Mr.zhang");
+        int rsNum = userDao.testUpdate(user);
+        System.out.println(rsNum);
+
+        user.setName("");
+        rsNum = userDao.testUpdate(user);
+        System.out.println(rsNum);
+
+        user.setAge(-1);
+        rsNum = userDao.testUpdate(user);
+        System.out.println(rsNum);
+
+        user.setAge(30);
+        rsNum = userDao.testUpdate(user);
+        System.out.println(rsNum);
+    }
+
+    @Test
+    public void testBatchInsert1 () {
+        List<User> users = new ArrayList<>();
+        User u1 = new User("n1", 11);
+        users.add(u1);
+        User u2 = new User("n2", 12);
+        users.add(u2);
+        int rsNum = userDao.testBatchInsert1(users);
+        System.out.println("rs num : " + rsNum);
+    }
+
+    /*@Test
+    public void testBatchInsert2 () {
+        List<User> users = new ArrayList<>();
+        User u1 = new User("n3", 11);
+        users.add(u1);
+        User u2 = new User("n4", 12);
+        users.add(u2);
+        int rsNum = userDao.testBatchInsert2(users);
+        System.out.println("rs num : " + rsNum);
+    }*/
 
 }
