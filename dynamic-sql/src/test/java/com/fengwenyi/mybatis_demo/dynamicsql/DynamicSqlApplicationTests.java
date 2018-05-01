@@ -114,4 +114,43 @@ public class DynamicSqlApplicationTests {
         System.out.println("rs num : " + rsNum);
     }*/
 
+    @Test
+    public void test_parameter1 () {
+        List<User> users = userDao.test_parameter1("n1");
+
+        for (User user : users) {
+            System.out.println(user.toString());
+        }
+    }
+
+    @Test
+    public void test_parameter2 () {
+        User u = new User();
+        u.setName("AAA");
+        u.setAge(20);
+        List<User> users = userDao.test_parameter2(u);
+
+        for (User user : users) {
+            System.out.println(user.toString());
+        }
+    }
+
+    @Test
+    public void testBind () {
+        List<User> users = userDao.testBind("n");
+
+        for (User user : users) {
+            System.out.println(user.toString());
+        }
+    }
+
+    @Test
+    public void testLike () {
+        List<User> users = userDao.testLike("%n%");
+
+        for (User user : users) {
+            System.out.println(user.toString());
+        }
+    }
+
 }

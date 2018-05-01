@@ -125,4 +125,58 @@
         </foreach>
     </insert>
 
+    <!--
+     // test _parameter
+    User test_parameter (Integer id);
+     -->
+    <select id="test_parameter1" resultType="User">
+        SELECT
+          id, name, age
+        FROM
+          <include refid="tName"/>
+        <where>
+            name = #{_paramete}
+        </where>
+    </select>
+
+    <select id="test_parameter2" resultType="User">
+        SELECT
+        id, name, age
+        FROM
+        <include refid="tName"/>
+        <where>
+            name = #{_parameter.name}
+            AND
+            age = #{_parameter.age}
+        </where>
+    </select>
+
+    <!--
+     List<User> testBind (String name);
+     -->
+    <select id="testBind" resultType="User">
+        <bind name="pattern" value="'%' + _parameter + '%'" />
+        SELECT
+          id, name, age
+        FROM
+          <include refid="tName"/>
+        <where>
+            name LIKE #{pattern}
+        </where>
+    </select>
+
+    <select id="testLike" resultType="User">
+        SELECT
+        id, name, age
+        FROM
+        <include refid="tName"/>
+        <where>
+            name LIKE #{_parameter}
+        </where>
+    </select>
+
+    <sql id="tName">
+        user
+    </sql>
+
 </mapper>

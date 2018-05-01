@@ -37,4 +37,12 @@ public interface IUserDao {
     // int testBatchInsert2 (@Param("users") List<User> users);
     // mysql url:spring.datasource.url=jdbc:mysql://localhost:3306/mybatis_demo?allowMultiQueries=true
 
+    // test _parameter
+    List<User> test_parameter1 (String name);
+    List<User> test_parameter2 (User user);
+
+    // test bind
+    List<User> testBind (String name);
+    List<User> testLike (String name);
+
 }
