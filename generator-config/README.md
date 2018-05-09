@@ -6,9 +6,9 @@
 
 1、我首先告诉你官方网站地址：**[MyBatis Generator](http://www.mybatis.org/generator/index.html)**
 
-2、前面在写测试的时候，就发现了这个问题，要写`dao`、`model`、`mpper`，这在写项目的时候显得是非痛苦，那怎么解决这个问题呢？——答案就是：**`mybatis generator`**。
+2、前面在写测试的时候，就发现了这个问题，要写 `dao` 、 `model` 、 `mpper` ，这在写项目的时候显得是非痛苦，那怎么解决这个问题呢？——答案就是： **`mybatis generator`** 。
 
-3、从第2点就知道了，MyBatis generator的主要作用就是创建`dao`、`model`、`mpper`。
+3、从第2点就知道了，MyBatis generator的主要作用就是创建 `dao` 、 `model` 、 `mpper` 。
 
 ## Quick Start Guide
 
@@ -30,7 +30,7 @@
 
 2、编写 `generatorConfig.xml`
 
-为了顺利完成这个文件的编写，我们参考官网的**[XML Configuration Reference](http://www.mybatis.org/generator/configreference/xmlconfig.html#)**部分进行编写。
+为了顺利完成这个文件的编写，我们参考官网的 **[XML Configuration Reference](http://www.mybatis.org/generator/configreference/xmlconfig.html#)** 部分进行编写。
 
 另外建议通过搜索引擎编写的更加完美，或者自己想要的。
 
@@ -42,12 +42,14 @@
 
 4、Running MyBatis Generator
 
-在这里**[Running MyBatis Generator](http://www.mybatis.org/generator/running/runningWithMaven.html)**，你可以找到各种运行方式。
+在这里 **[Running MyBatis Generator](http://www.mybatis.org/generator/running/runningWithMaven.html)** ，你可以找到各种运行方式。
 
 如果你是通过搜索引擎的话，可能会找到类似这样的命令
+
 >java -jar mybatis-generator-core-x.x.x.jar -configfile \temp\generatorConfig.xml -overwrite
 
 如果你是看开源项目的话，你会在`pom.xml`看到以下代码：
+
 ```xml
    <project ...>
      ...
@@ -75,6 +77,7 @@
     ...
   </project>
 ```
+
 不论哪种，你都可以在官网找到用法说明。
 
 那么我们怎么用呢？
@@ -114,6 +117,7 @@ public class RunGenerator {
     }
 }
 ```
+
 我们来看一下效果：
 
 ![run位置.png](https://upload-images.jianshu.io/upload_images/5805596-3c5842b8f5bbceea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -150,7 +154,7 @@ public void testCity () {
 
 1、你可以参考本节代码（**[generator-config](https://github.com/fengwenyi/mybatis-demo/tree/master/generator-config)**），就会很方便的生成你要相关文件和代码。
 
-2、如果你在前面的MyBatis的基础部分（例如**[Dynamic SQL](https://www.jianshu.com/p/535f9707d171)**），你可以参考`Mapper.xml`文件进行学习。
+2、如果你在前面的MyBatis的基础部分（例如 **[Dynamic SQL](https://www.jianshu.com/p/535f9707d171)** ），你可以参考 `Mapper.xml` 文件进行学习。
 
 ## 资料
 
@@ -158,4 +162,4 @@ public void testCity () {
 
 2、 **[MyBatis Generator](http://www.mybatis.org/generator/index.html)**
 
-3、本节测试代码：**[generator-config](https://github.com/fengwenyi/mybatis-demo/tree/master/generator-config)**
+3、本节测试代码： **[generator-config](https://github.com/fengwenyi/mybatis-demo/tree/master/generator-config)**
