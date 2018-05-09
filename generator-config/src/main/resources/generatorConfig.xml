@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <!-- 引入配置文件 -->
+    <properties resource="mybatisGeneratorInit.properties"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="${driver}"
+                        connectionURL="${url}"
+                        userId="${username}"
+                        password="${password}">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--
+        javaModelGenerator 实体类的生成策略
+         targetPackage  目标包
+         targetProject  目标工程
+         -->
+        <javaModelGenerator targetPackage="com.fengwenyi.demo.mybatis.generatorconfig.model"
+                            targetProject="${project}">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--
+        sqlMapGenerator  sql映射
+
+        -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="${resources}">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--
+         javaClientGenerator  mapper接口
+         -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fengwenyi.demo.mybatis.generatorconfig.dao"
+                             targetProject="${project}">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 逆向分析生成哪些表 -->
+        <!--<table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>-->
+
+        <table tableName="city" domainObjectName="City"></table>
+        <table tableName="province" domainObjectName="Province"></table>
+        <table tableName="user" domainObjectName="User"></table>
+
+    </context>
+</generatorConfiguration>
