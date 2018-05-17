@@ -1,6 +1,6 @@
 # mybatis-demo
 
-This is my learn MyBatis Demo.
+深入学习MyBatis，这是学习MyBatis时的测试代码
 
 ## dynamic-sql
 

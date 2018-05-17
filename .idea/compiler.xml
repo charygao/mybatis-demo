@@ -13,6 +13,7 @@
         <module name="dynamic-sql" />
         <module name="generator-config" />
         <module name="principle" />
+        <module name="user" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,6 +24,7 @@
       <module name="dynamic-sql" target="1.8" />
       <module name="generator-config" target="1.8" />
       <module name="principle" target="1.7" />
+      <module name="user" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

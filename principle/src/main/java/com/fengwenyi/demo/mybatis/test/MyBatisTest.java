@@ -34,6 +34,8 @@ public class MyBatisTest {
         try {
             sqlSession = this.getSqlSessionFactory().openSession();
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            System.out.println(userMapper);
+            // org.apache.ibatis.binding.MapperProxy@6325a3ee
             User user = userMapper.findById(1);
             System.out.println(user.toString());
         }  catch (Exception e) {
