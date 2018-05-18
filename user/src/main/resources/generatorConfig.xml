@@ -59,11 +59,13 @@
 
         <!-- <columnOverride column="address" javaType="java.lang.String" jdbcType="VARCHAR" /> -->
         <table domainObjectName="User" tableName="user">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
             <columnOverride column="id" javaType="java.lang.Long" />
             <columnOverride column="name" javaType="java.lang.String" />
             <columnOverride column="age" javaType="java.lang.Integer" />
         </table>
         <table domainObjectName="UserAuth" tableName="user_auth">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
             <columnOverride column="id" javaType="java.lang.Long" />
             <columnOverride column="account" javaType="java.lang.String" />
             <columnOverride column="password" javaType="java.lang.String" />

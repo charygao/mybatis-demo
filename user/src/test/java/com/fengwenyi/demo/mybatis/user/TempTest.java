@@ -9,13 +9,14 @@ public class TempTest {
 
     @Test
     public void testNum () {
-        Integer s = 20;
-        Integer a = 20;
+        int s = 20;
+        int a = 20;
         System.out.println(s == a);
 
-        int s1 = 200;
-        int a1 = 200;
-        System.out.println(s1 == a1);
+        Integer s1 = 200;
+        Integer a1 = 200;
+        boolean rs = s1 == a1;
+        System.out.println(rs);
     }
 
 }

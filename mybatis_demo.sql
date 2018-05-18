@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-05-01 23:21:52
+Date: 2018-05-18 10:11:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,7 +57,7 @@ CREATE TABLE `user` (
   `name` varchar(255) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user
@@ -75,3 +75,27 @@ INSERT INTO `user` VALUES ('12', 'n3', '11');
 INSERT INTO `user` VALUES ('13', 'n4', '12');
 INSERT INTO `user` VALUES ('14', 'n3', '11');
 INSERT INTO `user` VALUES ('15', 'n4', '12');
+INSERT INTO `user` VALUES ('16', '小冯少爷', '20');
+INSERT INTO `user` VALUES ('18', 'Wenyi Feng', '20');
+
+-- ----------------------------
+-- Table structure for user_auth
+-- ----------------------------
+DROP TABLE IF EXISTS `user_auth`;
+CREATE TABLE `user_auth` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `account` varchar(50) DEFAULT NULL COMMENT '账号',
+  `password` char(32) DEFAULT NULL COMMENT '密码',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户编号',
+  `time_create` datetime DEFAULT NULL COMMENT '创建时间',
+  `time_hander` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `un` (`account`),
+  KEY `fk_userauth_user` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of user_auth
+-- ----------------------------
+INSERT INTO `user_auth` VALUES ('1', '13550495918', 'xfsy2018', '16', '2018-05-17 13:10:45', '2018-05-17 13:10:46');
+INSERT INTO `user_auth` VALUES ('3', '1234567890', 'sdgt@#$%fjtyu6hwer4', '18', '2018-05-18 10:06:11', '2018-05-18 10:06:11');
